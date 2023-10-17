@@ -11,7 +11,7 @@ export default function Login() {
         <input type="password"></input>
         <button>Entrar</button>
 
-        <a href="">Criar Conta</a>
+        <a href="/register-user">Criar Conta</a>
       </div>
     </section>
   )
