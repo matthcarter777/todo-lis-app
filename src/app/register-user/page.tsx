@@ -39,8 +39,6 @@ export default function RegisterUser() {
         }
       })
       
-      Router.push('/login');
-
     } catch (err) {
       toast.error("Ocorreu um erro ao salvar registro.")
     }
