@@ -1,0 +1,44 @@
+.headerContainer {
+  height: 5rem;
+  border-bottom: 1px solid var(--gray-800);
+}
+
+.headerContent {
+  max-width: 1120px;
+  height: 5rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  nav {
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      p {
+        font-weight: bold;
+      }
+
+      button {
+        background: transparent;
+        border: none;
+
+        color: var(--gray-100)
+      }
+
+      button:hover {
+        color: #6633CC;
+      }
+
+      
+    }
+  }
+
+}

@@ -1,9 +1,9 @@
 'use client'
-import Router from "next/router";
 import { createContext } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from 'react-hot-toast';
 import { FaArrowLeft } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 import styles from './styles.module.scss';
 import { api } from '../services/apiClient';
@@ -16,6 +16,8 @@ type UserData = {
 
 export default function RegisterUser() {
   const Context = createContext({});
+
+  const router = useRouter();
 
   const { 
     register,
@@ -43,6 +45,7 @@ export default function RegisterUser() {
         }
       })
       
+      router.push("/login")
     } catch (err) {
       toast.error("Ocorreu um erro ao salvar registro.")
     }
