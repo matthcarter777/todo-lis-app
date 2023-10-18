@@ -4,7 +4,7 @@ export default function Login() {
   return (
     <section className={styles.container}>
       <div className={styles.loginContainer}>
-        <h2>Todo.List</h2>
+        <a href="/" className={styles.home}>Todo.List</a>
         <span>Usuário</span>
         <input></input>
         <span>Senha</span>

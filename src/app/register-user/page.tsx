@@ -25,9 +25,13 @@ export default function RegisterUser() {
   } = useForm<UserData>();
 
   const onSubmit: SubmitHandler<UserData> = (data) => {
-    try {      
+    try {        
       ( async () => {
-        await api.post('/users', { data });
+        await api.post('/users/', { 
+          name: data.name,
+          username: data.username,
+          password: data.password
+         });
       })()
 
       toast('Usuario criado com sucesso!', {
@@ -47,7 +51,7 @@ export default function RegisterUser() {
   return (
     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.loginContainer}>
-        <h2>Criar Usuario</h2>
+        <a href="/" className={styles.home}>Criar Usuario</a>
         <span>Nome</span>
         <input id="name" {...register("name", { required: true})}></input>
         <span>Usuário</span>
