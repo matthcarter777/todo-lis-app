@@ -2,14 +2,14 @@
   margin-top: 3rem;
   max-width: 80%;
   display: flex;
-  text-align: center;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
 
   section {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10rem;
     margin: 2rem;
 
     h4 {
