@@ -15,6 +15,7 @@ const  customStyles  =  {
     marginRight : '-50%' , 
     transform : 'translate(-50%, -50%)' ,
     backgroundColor : '#121214',
+    borderRadius: '20px',
   } , 
 } ;
 
@@ -49,19 +50,20 @@ export default function Home() {
   return (
     <>
       <Header />
-      <section>
-        <div className={styles.container}>
-          <section>
-            <h4>Suas atividades</h4>
-            <button onClick={openModal}>
-              Criar nova atividade
-            </button>
-          </section>
-
-          <Task taskData={task}/>
+  
+      <section className={styles.container}>
+        <div>
+          <h4>Suas atividades</h4>
+          <button type="button" onClick={openModal}>
+            Criar nova atividade
+          </button>
         </div>
+
       </section>
 
+      <div className={styles.contentContainer}>
+        <Task taskData={task} />
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

@@ -15,12 +15,10 @@ export function Header() {
           alt="Picture"
         />
         <nav>
-          <div>
-            <p>Mateus</p>
-            <button>
-              <FaSignOutAlt />
-            </button>
-          </div>
+          <p>Mateus</p>
+          <button>
+            <FaSignOutAlt />
+          </button>
         </nav>
       </div>
     </header>
