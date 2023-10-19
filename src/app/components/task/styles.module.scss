@@ -2,38 +2,42 @@
   border: 1.5px solid var(--gray-800);
   width: 50rem;
   height: 30rem;
-  padding: 2rem;
+  padding: 5rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  margin-bottom: 2rem;
+
   .headerContainer {
     display: flex;
-    flex-direction: row;
+    margin-bottom: 2rem;
+    gap: 3rem;
 
-    justify-content: center;
-
-    h4 {
-      font-size: 1rem;
-      margin-right: 1rem;
+    h4 {  
+      font-size: 0.8rem;
     }
   }
 
   .bodyContainer {
-    display: flex;
-    flex-direction: column;
-    margin-top: -4rem;
-    gap: 1rem;
+    
+    h2 {
+      margin-bottom: 2rem
+    }
+
+    p {
+      margin-bottom: 5rem;
+    }
   }
 
   .footerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .data {
-
-      p {
-        font-size: 0.8rem;
-      }
+      margin-bottom: 3rem;
     }
 
     .btns {
@@ -43,12 +47,39 @@
       justify-content: space-between;
 
       .btnDelete {
-        background-color: #c80000;
+        background-color: #bb2626;
+        border: none;
+        color: var(--gray-100);
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 2.5rem;
+        border-radius: 1rem;
+      
+        &:hover {
+          filter: brightness(0.8);
+        }
       }
 
-      button:hover {
-        filter: brightness(0.8);
+      .btnFinished {
+        background-color: #08671a;
+        border: none;
+        color: var(--gray-100);
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 2.5rem;
+        border-radius: 1rem;
+      
+        &:hover {
+          filter: brightness(0.8);
+        }
       }
     }
+    
   }
 }

@@ -63,6 +63,8 @@ export default function Home() {
 
       <div className={styles.contentContainer}>
         <Task taskData={task} />
+        <Task taskData={task} />
+        <Task taskData={task} />
       </div>
       <Modal
         isOpen={modalIsOpen}
