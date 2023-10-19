@@ -2,4 +2,53 @@
   border: 1.5px solid var(--gray-800);
   width: 50rem;
   height: 30rem;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .headerContainer {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+
+    h4 {
+      font-size: 1rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .bodyContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: -4rem;
+    gap: 1rem;
+  }
+
+  .footerContainer {
+
+    .data {
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+
+    .btns {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .btnDelete {
+        background-color: #c80000;
+      }
+
+      button:hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
 }
