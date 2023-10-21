@@ -47,7 +47,7 @@
       justify-content: space-between;
 
       .btnDelete {
-        background-color: #bb2626;
+        background-color: transparent;
         border: none;
         color: var(--gray-100);
         padding: 15px 32px;
@@ -57,14 +57,15 @@
         font-size: 16px;
         margin-right: 2.5rem;
         border-radius: 1rem;
+        font-size: 20px;
       
         &:hover {
-          filter: brightness(0.8);
+          color: #bb2626;
         }
       }
 
       .btnFinished {
-        background-color: #08671a;
+        background-color: transparent;
         border: none;
         color: var(--gray-100);
         padding: 15px 32px;
@@ -76,8 +77,22 @@
         border-radius: 1rem;
       
         &:hover {
-          filter: brightness(0.8);
+          color: #198f33;
         }
+      }
+
+      .btnIsFinished {
+        background: transparent;
+        color: #198f33;
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 2.5rem;
+        border-radius: 1rem;
+        font-size: 20px;
       }
     }
     

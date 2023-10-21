@@ -5,6 +5,8 @@ import styles from './styles.module.scss';
 
 export function Header() {
 
+  const username = localStorage.getItem("username");
+
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
@@ -15,7 +17,7 @@ export function Header() {
           alt="Picture"
         />
         <nav>
-          <p>Mateus</p>
+          <p>{username}</p>
           <button>
             <FaSignOutAlt />
           </button>

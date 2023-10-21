@@ -1,11 +1,11 @@
 'use client'
-import { createContext } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from 'react-hot-toast';
 import { FaArrowLeft } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 
 import styles from './styles.module.scss';
+
 import { api } from '../services/apiClient';
 
 type UserData = {
@@ -15,15 +15,11 @@ type UserData = {
 }
 
 export default function RegisterUser() {
-  const Context = createContext({});
-
   const router = useRouter();
 
   const { 
     register,
     handleSubmit,
-    watch,
-    formState: {errors}
   } = useForm<UserData>();
 
   const onSubmit: SubmitHandler<UserData> = (data) => {
@@ -44,8 +40,11 @@ export default function RegisterUser() {
           color: '#fff',
         }
       })
+
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("password", data.password);
       
-      router.push("/login")
+      router.push("/home")
     } catch (err) {
       toast.error("Ocorreu um erro ao salvar registro.")
     }

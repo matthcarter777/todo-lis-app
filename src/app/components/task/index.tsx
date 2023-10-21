@@ -1,4 +1,5 @@
 
+import { FaCheck, FaTimes } from 'react-icons/fa';
 import styles from './styles.module.scss';
 
 interface TaskData {
@@ -32,8 +33,20 @@ export default function Task({ taskData }: TaskProps) {
           <p>Data de Inicio {taskData.startAt} - Data de Finalização {taskData.endAt}</p>
         </div>
         <div className={styles.btns}>
-          <button className={styles.btnDelete} >Remover</button>
-          <button className={styles.btnFinished} >Finalizar</button>
+          <button className={styles.btnDelete} >
+            <FaTimes />
+          </button>
+          {
+            taskData.endAt == null 
+            ? 
+              <button className={styles.btnFinished} >
+                <FaCheck />
+              </button>
+            : 
+              <button className={styles.btnIsFinished} >
+                <FaCheck />
+              </button>
+          }
         </div>
       </div>
     </section>

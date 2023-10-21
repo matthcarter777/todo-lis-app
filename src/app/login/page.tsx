@@ -1,18 +1,66 @@
+'use client'
+import { createContext } from 'react';
+import { useForm, SubmitHandler } from "react-hook-form";
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+
+import { api } from '../services/apiClient';
+
 import styles from './styles.module.scss';
 
+type UserData = {
+  username: string;
+  password: string;
+}
+
+
 export default function Login() {
+  const router = useRouter();
+
+  const { 
+    register,
+    handleSubmit,
+    watch,
+    formState: {errors}
+  } = useForm<UserData>();
+
+  
+  const onSubmit: SubmitHandler<UserData> = (data) => {
+    try {        
+      ( async () => {
+        await api.post('/users/', { 
+          username: data.username,
+          password: data.password
+         });
+      })()
+
+      toast('Usuario criado com sucesso!', {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }
+      })
+      
+      router.push("/login")
+    } catch (err) {
+      toast.error("Ocorreu um erro ao salvar registro.")
+    }
+  }
+
   return (
     <section className={styles.container}>
-      <div className={styles.loginContainer}>
+      <form className={styles.loginContainer} onSubmit={handleSubmit(onSubmit)}>
         <a href="/" className={styles.home}>Todo.List</a>
         <span>Usuário</span>
-        <input></input>
+        <input id="username" {...register("username", { required: true})}></input>
         <span>Senha</span>
-        <input type="password"></input>
-        <button>Entrar</button>
+        <input id="password" type="password" {...register("password", { required: true})}></input>
+        <button type="submit">Entrar</button>
 
         <a href="/register-user">Criar Conta</a>
-      </div>
+      </form>
     </section>
   )
 }

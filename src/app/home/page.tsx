@@ -2,9 +2,11 @@
 import { Header } from "../components/header";
 import Task from "../components/task";
 import Modal from 'react-modal';
+import toast, { Toaster } from 'react-hot-toast';
 
 import styles from './styles.module.scss';
 import { useState } from "react";
+import { api } from "../services/apiClient";
 
 const  customStyles  =  { 
   content : { 
@@ -26,8 +28,42 @@ export default function Home() {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
 
+  const username = localStorage.getItem("username");
+  const password = localStorage.getItem("password");
+
   function saveTask() {
-    console.log(title, description, priority);
+    try {
+
+      ( async () => {
+        await api.post('/tasks/', { 
+          title,
+          description,
+          prority: priority,
+          startAt: "2023-12-10T12:30",
+          endAt: "2023-12-10T13:30"
+         }, {
+          auth: {
+            username,
+            password,
+           }
+         });
+      })()
+
+      setIsOpen(false);
+  
+      toast('Tarefa criada com sucesso!', {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }
+      })
+
+      
+    } catch (error) {
+      
+    }
   }
 
   function openModal() {
