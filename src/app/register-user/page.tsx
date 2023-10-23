@@ -40,11 +40,8 @@ export default function RegisterUser() {
           color: '#fff',
         }
       })
-
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("password", data.password);
       
-      router.push("/home")
+      router.push("/login")
     } catch (err) {
       toast.error("Ocorreu um erro ao salvar registro.")
     }

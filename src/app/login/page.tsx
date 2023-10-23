@@ -28,22 +28,31 @@ export default function Login() {
   const onSubmit: SubmitHandler<UserData> = (data) => {
     try {        
       ( async () => {
-        await api.post('/users/', { 
+        const response = await api.post('/users/login', { 
           username: data.username,
           password: data.password
          });
+
+         if (response.data === true) {
+          localStorage.removeItem("username");
+          localStorage.removeItem("password");
+
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("password", data.password);
+
+           toast('Usuario criado com sucesso!', {
+             icon: '👏',
+             style: {
+               borderRadius: '10px',
+               background: '#333',
+               color: '#fff',
+             }
+           })
+  
+           router.push("/home")
+         }
       })()
 
-      toast('Usuario criado com sucesso!', {
-        icon: '👏',
-        style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-        }
-      })
-      
-      router.push("/login")
     } catch (err) {
       toast.error("Ocorreu um erro ao salvar registro.")
     }
