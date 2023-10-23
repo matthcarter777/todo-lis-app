@@ -2,11 +2,20 @@
 import { Header } from "../components/header";
 import Task from "../components/task";
 import Modal from 'react-modal';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import styles from './styles.module.scss';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../services/apiClient";
+
+interface TaskData {
+  id: string;
+  description: string;
+  title: string;
+  startAt: string;
+  endAt: string;
+  prority: string;
+}
 
 const  customStyles  =  { 
   content : { 
@@ -21,12 +30,36 @@ const  customStyles  =  {
   } , 
 } ;
 
-
 export default function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
+  const [startAt, setStartAt] = useState("");
+  const [endAt, setEndAt] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    (async() => {
+
+      const username = localStorage.getItem("username");
+      const password = localStorage.getItem("password");
+
+      if (username !== null && password !== null) {
+        const response = await api.get('/tasks/', {
+          auth: {
+            username,
+            password,
+           }
+         })
+        
+        setTasks(response.data);
+
+        console.log(tasks)
+      }
+    })()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function saveTask() {
     try {
@@ -40,30 +73,33 @@ export default function Home() {
             title,
             description,
             prority: priority,
-            startAt: "2023-12-10T12:30",
-            endAt: "2023-12-10T13:30"
+            startAt: startAt,
+            endAt: endAt
            }, {
             auth: {
               username,
               password,
              }
            });
+
+           setIsOpen(false);
+           setTitle("");
+           setDescription("");
+           setPriority("");
+           setStartAt("");
+           setEndAt("")
+  
+           toast('Tarefa criada com sucesso!', {
+             icon: '👏',
+             style: {
+               borderRadius: '10px',
+               background: '#333',
+               color: '#fff',
+             }
+           })
         }
 
       })()
-
-      setIsOpen(false);
-  
-      toast('Tarefa criada com sucesso!', {
-        icon: '👏',
-        style: {
-          borderRadius: '10px',
-          background: '#333',
-          color: '#fff',
-        }
-      })
-
-      
     } catch (error) {
       
     }
@@ -105,6 +141,7 @@ export default function Home() {
         <Task taskData={task} />
         <Task taskData={task} />
       </div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -129,6 +166,14 @@ export default function Home() {
             <br />
             <input type="text" value={priority} onChange={(event) => setPriority(event.target.value)} />
             <br />
+            <span>Data de inicio</span>
+            <br />
+            <input type="datetime-local" value={startAt} onChange={(event) => setStartAt(event.target.value)} />
+            <br />
+            <span>Data Final</span>
+            <br />
+            <input type="datetime-local" value={endAt} onChange={(event) => setEndAt(event.target.value)} />
+            <br />
           </div>
           <div className={styles.footerModal}>
             <button onClick={closeModal} className={styles.btnClose}>Fechar</button>
@@ -136,6 +181,7 @@ export default function Home() {
           </div>
         </div>
       </Modal>
+    
     </>
   )
 }
