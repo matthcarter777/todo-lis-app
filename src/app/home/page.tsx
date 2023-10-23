@@ -28,25 +28,28 @@ export default function Home() {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
 
-  const username = localStorage.getItem("username");
-  const password = localStorage.getItem("password");
-
   function saveTask() {
     try {
 
       ( async () => {
-        await api.post('/tasks/', { 
-          title,
-          description,
-          prority: priority,
-          startAt: "2023-12-10T12:30",
-          endAt: "2023-12-10T13:30"
-         }, {
-          auth: {
-            username,
-            password,
-           }
-         });
+        const username = localStorage.getItem("username");
+        const password = localStorage.getItem("password");
+
+        if (username !== null && password !== null) {
+          await api.post('/tasks/', { 
+            title,
+            description,
+            prority: priority,
+            startAt: "2023-12-10T12:30",
+            endAt: "2023-12-10T13:30"
+           }, {
+            auth: {
+              username,
+              password,
+             }
+           });
+        }
+
       })()
 
       setIsOpen(false);

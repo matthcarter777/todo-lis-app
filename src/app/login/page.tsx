@@ -49,7 +49,7 @@ export default function Login() {
              }
            })
   
-           router.push("/home")
+           router.push("/home");
          }
       })()
 
