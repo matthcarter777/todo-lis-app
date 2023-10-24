@@ -153,7 +153,11 @@ export default function Home() {
             <br />
             <span>Prioridade</span>
             <br />
-            <input type="text" value={priority} onChange={(event) => setPriority(event.target.value)} />
+            <select name="priority" value={priority} onChange={(event) => setPriority(event.target.value)}>
+              <option value="baixa">Baixa</option>
+              <option value="media">Media</option>
+              <option value="alta">Alta</option>
+            </select>
             <br />
             <span>Data de inicio</span>
             <br />

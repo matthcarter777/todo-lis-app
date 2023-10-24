@@ -1,4 +1,4 @@
-
+import pt from 'date-fns/locale/pt-BR';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { parseISO } from 'date-fns';
 
@@ -28,13 +28,15 @@ export default function Task({ taskData }: TaskProps) {
     data, 
     "'Dia' dd 'de' MMMM', às ' HH:mm'h'", {
       timeZone: 'America/Sao_Paulo',
+      locale: pt
     }
   );
 
   const endDataFormat = format(
     endData, 
     "'Dia' dd 'de' MMMM', às ' HH:mm'h'", {
-      timeZone: 'America/Sao_Paulo'
+      timeZone: 'America/Sao_Paulo',
+      locale: pt
     }
   );
 
