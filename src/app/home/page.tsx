@@ -1,4 +1,5 @@
 'use client';
+import useSWR from 'swr';
 import { Header } from "../components/header";
 import Task from "../components/task";
 import Modal from 'react-modal';
@@ -7,6 +8,7 @@ import toast from 'react-hot-toast';
 import styles from './styles.module.scss';
 import { useState, useEffect } from "react";
 import { api } from "../services/apiClient";
+import { useFetch } from '../hooks/useFetch';
 
 interface TaskData {
   id: string;
@@ -30,6 +32,7 @@ const  customStyles  =  {
   } , 
 } ;
 
+
 export default function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -39,27 +42,9 @@ export default function Home() {
   const [endAt, setEndAt] = useState("");
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    (async() => {
+  const { data } = useFetch<TaskData[]>("/tasks/");
 
-      const username = localStorage.getItem("username");
-      const password = localStorage.getItem("password");
-
-      if (username !== null && password !== null) {
-        const response = await api.get('/tasks/', {
-          auth: {
-            username,
-            password,
-           }
-         })
-        
-        setTasks(response.data);
-
-        console.log(tasks)
-      }
-    })()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  console.log(data);
 
   function saveTask() {
     try {
@@ -137,9 +122,9 @@ export default function Home() {
       </section>
 
       <div className={styles.contentContainer}>
-        <Task taskData={task} />
-        <Task taskData={task} />
-        <Task taskData={task} />
+        { data?.map(data => (
+          <Task key={data.id} taskData={data} />
+        )) }
       </div>
 
       <Modal
