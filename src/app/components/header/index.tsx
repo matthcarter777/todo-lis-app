@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 
 import { FaSignOutAlt } from "react-icons/fa";
 
-
 import styles from './styles.module.scss';
 
 export function Header() {
@@ -17,8 +16,6 @@ export function Header() {
     router.push("/home");
   }
 
-  const username = localStorage.getItem("username");
-
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
@@ -29,7 +26,6 @@ export function Header() {
           alt="Picture"
         />
         <nav>
-          <p>{username}</p>
           <button onClick={logout}>
             <FaSignOutAlt />
           </button>

@@ -1,5 +1,4 @@
 'use client';
-import useSWR from 'swr';
 import { Header } from "../components/header";
 import Task from "../components/task";
 import Modal from 'react-modal';
@@ -40,11 +39,16 @@ export default function Home() {
   const [priority, setPriority] = useState("");
   const [startAt, setStartAt] = useState("");
   const [endAt, setEndAt] = useState("");
-  const [tasks, setTasks] = useState([]);
 
-  const { data } = useFetch<TaskData[]>("/tasks/");
+  let username: string = "";
+  let password: string = "";
 
-  console.log(data);
+  if (typeof localStorage !== 'undefined') { 
+    username = localStorage.getItem("username") as string;
+    password = localStorage.getItem("password") as string;
+  }
+
+  const { data } = useFetch<TaskData[]>("/tasks/", username, password);
 
   function saveTask() {
     try {

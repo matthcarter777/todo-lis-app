@@ -1,5 +1,9 @@
 
 import { FaCheck, FaTimes } from 'react-icons/fa';
+import { parseISO } from 'date-fns';
+
+import { format } from 'date-fns-tz';
+
 import styles from './styles.module.scss';
 
 interface TaskData {
@@ -17,12 +21,28 @@ interface TaskProps {
 
 export default function Task({ taskData }: TaskProps) {
 
+  const data = parseISO(taskData.startAt);
+  const endData = parseISO(taskData.endAt);
+
+  const dataFormat = format(
+    data, 
+    "'Dia' dd 'de' MMMM', às ' HH:mm'h'", {
+      timeZone: 'America/Sao_Paulo',
+    }
+  );
+
+  const endDataFormat = format(
+    endData, 
+    "'Dia' dd 'de' MMMM', às ' HH:mm'h'", {
+      timeZone: 'America/Sao_Paulo'
+    }
+  );
 
   return (
     <section className={styles.container}>
       <div className={styles.headerContainer}>
         <h4>Id# - {taskData.id}</h4>
-        <h4>18 - Agosto - 2023</h4>
+        <h4>{ dataFormat }</h4>
       </div>
       <div className={styles.bodyContainer}>
         <h2>{taskData.title}</h2>
@@ -30,7 +50,7 @@ export default function Task({ taskData }: TaskProps) {
       </div>
       <div className={styles.footerContainer}>
         <div className={styles.data}>
-          <p>Data de Inicio {taskData.startAt} - Data de Finalização {taskData.endAt}</p>
+          <p>Data de Inicio {dataFormat} - Data de Finalização {endDataFormat}</p>
         </div>
         <div className={styles.btns}>
           <button className={styles.btnDelete} >
